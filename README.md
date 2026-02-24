@@ -1,3 +1,16 @@
+# PROJECT: Emotional Drift Analyzer in Long Text
+
+This program analyzes how emotions change over time in long text like movie scripts, diaries, or stories. 
+For CSA4028: Natural Language Processing.
+
+Core concepts used from NLP Syllabus:
+- Sentence Segmentation (Discourse segmentation)
+- POS Tagging (Syntax Parsing)
+- Sliding Window Analysis (Temporal NLP)
+- Sentiment Scoring (Models & Algorithms)
+- Regular Expressions (Text Cleaning)
+
+
 ## Setup
 
 1. create venv
