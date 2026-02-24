@@ -1,6 +1,7 @@
 # PROJECT: Emotional Drift Analyzer in Long Text
 
 This program analyzes how emotions change over time in long text like movie scripts, diaries, or stories. 
+
 For CSA4028: Natural Language Processing.
 
 ### Group Members
