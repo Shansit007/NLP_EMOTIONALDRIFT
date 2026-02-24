@@ -3,15 +3,25 @@
 This program analyzes how emotions change over time in long text like movie scripts, diaries, or stories. 
 For CSA4028: Natural Language Processing.
 
-Core concepts used from NLP Syllabus:
+### Group Members
+
+| REGISTRATION NO.    | NAME              |
+|---------------------|-------------------|
+| 23BAI10001          | ABHAY TYAGI       |
+| 23BAI10082          | RISHAB TOMAR      |
+| 23BAI10424          | SHANSIT SUMAN     |
+| 23BAI10620          | SHREYA GOYAL      |
+| 23BAI10847          | ASHISH VISHWAKARMA|
+---
+**Core concepts used from NLP Syllabus:**
 - Sentence Segmentation (Discourse segmentation)
 - POS Tagging (Syntax Parsing)
 - Sliding Window Analysis (Temporal NLP)
 - Sentiment Scoring (Models & Algorithms)
+- Emotion tracking with lexicon (lexicon dictionary)
 - Regular Expressions (Text Cleaning)
 
 Code is highly commented for demonstration purposes in class.
-
 
 ## Setup
 
