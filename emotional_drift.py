@@ -9,6 +9,7 @@ import nltk
 import spacy
 import matplotlib.pyplot as plt
 import numpy as np
+from nrclex import NRCLex
 from textblob import TextBlob
 
 # Load spaCy model (used for sentence segmentation + POS tagging)
@@ -93,6 +94,51 @@ def sliding_window_average(scores, window_size=3):
 
 
 # =========================
+# STEP 5B: EMOTION CATEGORIES
+# (NRC Lexicon via NRCLex)
+# =========================
+
+EMOTION_CATEGORIES = [
+    "anger",
+    "anticipation",
+    "disgust",
+    "fear",
+    "joy",
+    "sadness",
+    "surprise",
+    "trust",
+]
+
+
+def get_emotion_category_scores(sentences, emotions=None):
+    """
+    Computes normalized emotion category scores per sentence.
+    """
+    if emotions is None:
+        emotions = EMOTION_CATEGORIES
+
+    scores = {emotion: [] for emotion in emotions}
+    for sentence in sentences:
+        lex = NRCLex(sentence)
+        raw_scores = lex.raw_emotion_scores
+        word_count = len(re.findall(r"[A-Za-z']+", sentence))
+        denom = max(1, word_count)
+        for emotion in emotions:
+            scores[emotion].append(raw_scores.get(emotion, 0) / denom)
+    return scores
+
+
+def smooth_emotion_categories(emotion_scores, window_size=3):
+    """
+    Smooths emotion category scores with a sliding window.
+    """
+    return {
+        emotion: sliding_window_average(values, window_size)
+        for emotion, values in emotion_scores.items()
+    }
+
+
+# =========================
 # STEP 6: DETECT EMOTIONAL SHIFTS
 # =========================
 
@@ -137,12 +183,36 @@ def plot_emotion_timeline(scores, shifts, output_dir="results", filename="emotio
 
 
 # =========================
+# STEP 8: PLOT EMOTION CATEGORIES
+# =========================
+
+def plot_emotion_categories(emotion_scores, output_dir="results", filename="emotion_categories.png"):
+    """
+    Plots emotion category drift over time.
+    """
+    plt.figure(figsize=(10,5))
+    for emotion, values in emotion_scores.items():
+        plt.plot(values, label=emotion.capitalize())
+
+    plt.title("Emotion Category Drift")
+    plt.xlabel("Sentence Index (Time)")
+    plt.ylabel("Normalized Emotion Score")
+    plt.legend(ncol=2, fontsize=9)
+    plt.grid(True)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    plt.tight_layout()
+    plt.savefig(output_path / filename, dpi=150)
+    plt.show()
+
+
+# =========================
 # MAIN EXECUTION
 # =========================
 
 if __name__ == "__main__":
 
-    file_path = "data/sample_script.txt"
+    file_path = "data/sample_op_ed.txt"
 
     # Load
     text = load_text(file_path)
@@ -164,3 +234,8 @@ if __name__ == "__main__":
 
     # Plot
     plot_emotion_timeline(smoothed_scores, shifts)
+
+    # Emotion categories
+    emotion_scores = get_emotion_category_scores(sentences)
+    smoothed_emotion_scores = smooth_emotion_categories(emotion_scores)
+    plot_emotion_categories(smoothed_emotion_scores)
