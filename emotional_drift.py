@@ -2,14 +2,16 @@
 # IMPORT LIBRARIES
 # =========================
 
-import re  # Regular Expressions (syllabus: Formal Languages)
+import re
+from pathlib import Path
+
 import nltk
 import spacy
 import matplotlib.pyplot as plt
 import numpy as np
 from textblob import TextBlob
 
-# Load spacy model (used for sentence segmentation + POS tagging)
+# Load spaCy model (used for sentence segmentation + POS tagging)
 nlp = spacy.load("en_core_web_sm")
 
 # Download punkt tokenizer (for sentence splitting)
@@ -111,7 +113,7 @@ def detect_shifts(scores, threshold=0.5):
 # STEP 7: PLOT EMOTION TIMELINE
 # =========================
 
-def plot_emotion_timeline(scores, shifts):
+def plot_emotion_timeline(scores, shifts, output_dir="results", filename="emotional_drift.png"):
     """
     Creates emotion timeline graph.
     """
@@ -127,6 +129,10 @@ def plot_emotion_timeline(scores, shifts):
     plt.ylabel("Sentiment Polarity")
     plt.legend()
     plt.grid(True)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    plt.tight_layout()
+    plt.savefig(output_path / filename, dpi=150)
     plt.show()
 
 
