@@ -10,6 +10,8 @@ Core concepts used from NLP Syllabus:
 - Sentiment Scoring (Models & Algorithms)
 - Regular Expressions (Text Cleaning)
 
+Code is highly commented for demonstration purposes in class.
+
 
 ## Setup
 

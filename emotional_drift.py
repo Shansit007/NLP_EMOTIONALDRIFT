@@ -1,18 +1,3 @@
-"""
-PROJECT: Emotional Drift Analyzer in Long Text
-AUTHOR: Shreya
-DESCRIPTION:
-This program analyzes how emotions change over time in long text
-like movie scripts, diaries, or stories.
-
-Core Concepts Used from NLP Syllabus:
-- Sentence Segmentation (Discourse segmentation)
-- POS Tagging (Syntax Parsing)
-- Sliding Window Analysis (Temporal NLP)
-- Sentiment Scoring (Models & Algorithms)
-- Regular Expressions (Text Cleaning)
-"""
-
 # =========================
 # IMPORT LIBRARIES
 # =========================
