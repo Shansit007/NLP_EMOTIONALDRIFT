@@ -77,6 +77,23 @@ def get_sentiment_scores(sentences):
 
 
 # =========================
+# STEP 4B: SUBJECTIVITY SCORES
+# =========================
+
+def get_subjectivity_scores(sentences):
+    """
+    Computes subjectivity for each sentence.
+    Range:
+    0 (objective) to 1 (subjective)
+    """
+    scores = []
+    for sentence in sentences:
+        blob = TextBlob(sentence)
+        scores.append(blob.sentiment.subjectivity)
+    return scores
+
+
+# =========================
 # STEP 5: SLIDING WINDOW ANALYSIS
 # (Temporal Emotion Tracking)
 # =========================
@@ -207,6 +224,29 @@ def plot_emotion_categories(emotion_scores, output_dir="results", filename="emot
 
 
 # =========================
+# STEP 9: PLOT SUBJECTIVITY DRIFT
+# =========================
+
+def plot_subjectivity_timeline(scores, output_dir="results", filename="subjectivity_drift.png"):
+    """
+    Plots subjectivity drift over time.
+    """
+    plt.figure(figsize=(10,5))
+    plt.plot(scores, marker='o', label="Subjectivity")
+
+    plt.title("Subjectivity Drift Timeline")
+    plt.xlabel("Sentence Index (Time)")
+    plt.ylabel("Subjectivity (0-1)")
+    plt.legend()
+    plt.grid(True)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    plt.tight_layout()
+    plt.savefig(output_path / filename, dpi=150)
+    plt.show()
+
+
+# =========================
 # MAIN EXECUTION
 # =========================
 
@@ -226,14 +266,21 @@ if __name__ == "__main__":
     # Sentence-level sentiment
     scores = get_sentiment_scores(sentences)
 
+    # Subjectivity
+    subjectivity_scores = get_subjectivity_scores(sentences)
+
     # Sliding window smoothing
     smoothed_scores = sliding_window_average(scores)
+    smoothed_subjectivity_scores = sliding_window_average(subjectivity_scores)
 
     # Detect sudden shifts
     shifts = detect_shifts(smoothed_scores)
 
     # Plot
     plot_emotion_timeline(smoothed_scores, shifts)
+
+    # Subjectivity plot
+    plot_subjectivity_timeline(smoothed_subjectivity_scores)
 
     # Emotion categories
     emotion_scores = get_emotion_category_scores(sentences)
