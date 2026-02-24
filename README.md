@@ -23,6 +23,9 @@ For CSA4028: Natural Language Processing.
 
 Code is highly commented for demonstration purposes in class.
 
+## Demo
+Demo notebook is `emotional_drift_demo.ipnyb` and walks through the process.
+
 ## Setup
 
 1. create venv
