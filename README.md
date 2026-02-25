@@ -10,8 +10,8 @@ For CSA4028: Natural Language Processing.
 |---------------------|-------------------|
 | 23BAI10001          | ABHAY TYAGI       |
 | 23BAI10082          | RISHAB TOMAR      |
-| 23BAI10424          | SHANSIT SUMAN     |
 | 23BAI10620          | SHREYA GOYAL      |
+| 23BAI10424          | SHANSIT SUMAN     |
 | 23BAI10847          | ASHISH VISHWAKARMA|
 ---
 **Core concepts used from NLP Syllabus:**
