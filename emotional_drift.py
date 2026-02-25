@@ -1,6 +1,4 @@
-# =========================
 # IMPORT LIBRARIES
-# =========================
 
 import re
 from pathlib import Path
@@ -19,9 +17,7 @@ nlp = spacy.load("en_core_web_sm")
 nltk.download('punkt')
 
 
-# =========================
 # STEP 1: READ TEXT FILE
-# =========================
 
 def load_text(file_path):
     """
@@ -31,10 +27,8 @@ def load_text(file_path):
         return file.read()
 
 
-# =========================
 # STEP 2: CLEAN TEXT
 # (Using Regular Expressions)
-# =========================
 
 def clean_text(text):
     """
@@ -45,10 +39,8 @@ def clean_text(text):
     return text
 
 
-# =========================
 # STEP 3: SENTENCE SEGMENTATION
 # (Discourse Segmentation Concept)
-# =========================
 
 def segment_sentences(text):
     """
@@ -59,9 +51,7 @@ def segment_sentences(text):
     return sentences
 
 
-# =========================
 # STEP 4: SENTENCE LEVEL SENTIMENT
-# =========================
 
 def get_sentiment_scores(sentences):
     """
@@ -76,9 +66,7 @@ def get_sentiment_scores(sentences):
     return scores
 
 
-# =========================
 # STEP 4B: SUBJECTIVITY SCORES
-# =========================
 
 def get_subjectivity_scores(sentences):
     """
@@ -93,10 +81,8 @@ def get_subjectivity_scores(sentences):
     return scores
 
 
-# =========================
 # STEP 5: SLIDING WINDOW ANALYSIS
 # (Temporal Emotion Tracking)
-# =========================
 
 def sliding_window_average(scores, window_size=3):
     """
@@ -110,10 +96,8 @@ def sliding_window_average(scores, window_size=3):
     return smoothed
 
 
-# =========================
 # STEP 5B: EMOTION CATEGORIES
 # (NRC Lexicon via NRCLex)
-# =========================
 
 EMOTION_CATEGORIES = [
     "anger",
@@ -155,9 +139,7 @@ def smooth_emotion_categories(emotion_scores, window_size=3):
     }
 
 
-# =========================
 # STEP 6: DETECT EMOTIONAL SHIFTS
-# =========================
 
 def detect_shifts(scores, threshold=0.5):
     """
@@ -172,9 +154,7 @@ def detect_shifts(scores, threshold=0.5):
     return shifts
 
 
-# =========================
 # STEP 7: PLOT EMOTION TIMELINE
-# =========================
 
 def plot_emotion_timeline(scores, shifts, output_dir="results", filename="emotional_drift.png"):
     """
@@ -199,9 +179,7 @@ def plot_emotion_timeline(scores, shifts, output_dir="results", filename="emotio
     plt.show()
 
 
-# =========================
 # STEP 8: PLOT EMOTION CATEGORIES
-# =========================
 
 def plot_emotion_categories(emotion_scores, output_dir="results", filename="emotion_categories.png"):
     """
@@ -223,9 +201,7 @@ def plot_emotion_categories(emotion_scores, output_dir="results", filename="emot
     plt.show()
 
 
-# =========================
 # STEP 9: PLOT SUBJECTIVITY DRIFT
-# =========================
 
 def plot_subjectivity_timeline(scores, output_dir="results", filename="subjectivity_drift.png"):
     """
@@ -246,9 +222,9 @@ def plot_subjectivity_timeline(scores, output_dir="results", filename="subjectiv
     plt.show()
 
 
-# =========================
+
 # MAIN EXECUTION
-# =========================
+
 
 if __name__ == "__main__":
 
